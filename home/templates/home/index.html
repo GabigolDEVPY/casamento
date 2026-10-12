@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Casamento — Gabriel &amp; Gabriela">
+    <title>Casamento — Gabriel &amp; Gabriela</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ballet:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #f4f8fb;
+            --bg-alt: #edf3f8;
+            --accent: #7aaec4;
+            --accent-dark: #5a8ea4;
+            --accent-hover: #5a8ea4;
+            --accent-light: #c5dde8;
+            --accent-pale: #e4eff5;
+            --text: #2c3e50;
+            --text-muted: #6b8299;
+            --text-light: #94adbf;
+            --cream: #ffffff;
+            --shadow: rgba(44, 62, 80, 0.06);
+            --shadow-md: rgba(44, 62, 80, 0.1);
+            --border: rgba(122, 174, 196, 0.2);
+            --floral-pink: #e8b4c8;
+            --floral-pink-light: #f2d4e0;
+            --floral-green: #a8c9a0;
+            --floral-green-light: #d4e8d0;
+            --floral-blue: #9ab8d4;
+            --floral-lavender: #c4b4d8;
+            --wax-dark: #5a8ea4;
+            --wax-mid: #7aaec4;
+            --wax-light: #a8cde0;
+            --envelope-1: #c5dde8;
+            --envelope-2: #a8cde0;
+            --envelope-3: #8ebdd4;
+            --envelope-flap: #d8eaf2;
+            --font-names: 'Ballet', cursive;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Lora', Georgia, serif;
+            --font-mono: 'DM Mono', 'Courier New', monospace;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+
+        /* ENVELOPE SCREEN */
+        #envelope-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background:
+                radial-gradient(ellipse at 25% 15%, rgba(122, 174, 196, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 85%, rgba(168, 205, 224, 0.1) 0%, transparent 50%),
+                linear-gradient(170deg, #e8f0f5 0%, #d8e8f0 50%, #e8f0f5 100%);
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
+            overflow: hidden;
+        }
+        #envelope-screen.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(122, 174, 196, 0.3);
+            pointer-events: none;
+            animation: sparkle-float linear infinite;
+        }
+        @keyframes sparkle-float {
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            10%  { opacity: 1; }
+            90%  { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        .envelope-intro {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: rgba(122, 174, 196, 0.6);
+            animation: fade-in 1.5s ease 0.5s both;
+            text-align: center;
+        }
+
+        .envelope-scene {
+            perspective: 1400px;
+            animation: envelope-entrance 1.2s ease both;
+        }
+        @keyframes envelope-entrance {
+            from { opacity: 0; transform: translateY(40px) scale(0.92); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: min(85vw, 380px);
+            height: min(60vw, 260px);
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .envelope-back {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(160deg, var(--envelope-1), var(--envelope-2));
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(44, 62, 80, 0.15), 0 5px 15px rgba(44, 62, 80, 0.08), inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+        .envelope-back::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23000'/%3E%3Crect width='2' height='2' fill='%23fff'/%3E%3C/svg%3E");
+            background-size: 4px;
+        }
+
+        .envelope-inner-v {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 55%;
+            overflow: hidden;
+            border-radius: 0 0 12px 12px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .envelope-inner-v::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--envelope-3);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        .envelope-left-fold, .envelope-right-fold {
+            position: absolute;
+            top: 0; width: 50%; height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            z-index: 3;
+        }
+        .envelope-left-fold { left: 0; }
+        .envelope-right-fold { right: 0; }
+        .envelope-left-fold::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: -1px;
+            width: 0; height: 0;
+            border-bottom: min(60vw, 260px) solid var(--envelope-2);
+            border-right: min(25vw, 120px) solid transparent;
+            opacity: 0.5;
+        }
+        .envelope-right-fold::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: -1px;
+            width: 0; height: 0;
+            border-bottom: min(60vw, 260px) solid var(--envelope-2);
+            border-left: min(25vw, 120px) solid transparent;
+            opacity: 0.5;
+        }
+
+        .envelope-card {
+            position: absolute;
+            left: 8%; right: 8%; bottom: 10%; height: 88%;
+            background: linear-gradient(to bottom, #ffffff, #f4f8fb);
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(44, 62, 80, 0.12);
+            transform: translateY(6%);
+            opacity: 0;
+            z-index: 5;
+            transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s, opacity 0.6s ease 0.55s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .envelope-card::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(122, 174, 196, 0.15);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 52%;
+            transform-origin: top center;
+            transform-style: preserve-3d;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+        }
+        .envelope-flap-front {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            background: linear-gradient(180deg, var(--envelope-flap), var(--envelope-1));
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+        }
+        .envelope-flap-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: rotateX(180deg);
+            background: linear-gradient(0deg, var(--envelope-flap), var(--envelope-1));
+            clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+            border-radius: 12px 12px 0 0;
+            opacity: 0.85;
+        }
+
+        .envelope-wrapper.opened .envelope-flap {
+            transform: rotateX(-180deg);
+            z-index: 4;
+        }
+        .envelope-wrapper.opened .envelope-card {
+            transform: translateY(-8%);
+            opacity: 1;
+            z-index: 25;
+        }
+
+        .wax-seal-container {
+            position: absolute;
+            top: 42%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 21;
+            transition: opacity 0.4s ease, transform 0.5s ease;
+        }
+        .envelope-wrapper.opened .wax-seal-container {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.5) rotate(15deg);
+        }
+
+        .wax-seal {
+            width: 80px; height: 80px;
+            user-select: none;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            filter: drop-shadow(0 4px 10px rgba(44, 62, 80, 0.2));
+        }
+        .envelope-wrapper:hover .wax-seal {
+            transform: scale(1.08);
+            filter: drop-shadow(0 6px 14px rgba(44, 62, 80, 0.3));
+        }
+
+        .card-ornament { font-size: 0.8rem; color: var(--accent); letter-spacing: 0.6em; opacity: 0.5; margin-bottom: 4px; }
+        .card-pretext { font-family: var(--font-body); font-size: 0.68rem; font-style: italic; color: var(--text-muted); line-height: 1.4; }
+        .card-main-title { font-family: var(--font-display); font-size: clamp(1.3rem, 4.5vw, 1.8rem); font-weight: 300; color: var(--text); letter-spacing: 0.04em; }
+        .card-names { font-family: var(--font-names); font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 400; color: var(--accent-dark); line-height: 1.5; }
+        .card-names em { font-family: var(--font-display); font-size: 0.8em; color: var(--accent); font-style: italic; display: block; margin: 1px 0; }
+        .card-date-line { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 300; letter-spacing: 0.25em; color: var(--accent); }
+        .card-small-divider { width: 40px; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 3px 0; }
+        .card-hint {
+            font-family: var(--font-mono); font-size: 0.65rem; font-weight: 300;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: rgba(122, 174, 196, 0.5);
+            animation: pulse-opacity 2.5s ease-in-out infinite;
+            transition: opacity 0.4s ease;
+        }
+        @keyframes pulse-opacity { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+
+        .envelope-shadow {
+            position: absolute;
+            bottom: -10px; left: 10%; right: 10%; height: 20px;
+            background: radial-gradient(ellipse, rgba(44, 62, 80, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 1.4s ease;
+            z-index: 0;
+        }
+        .envelope-wrapper.opened .envelope-shadow {
+            bottom: -18px; left: 5%; right: 5%; opacity: 0.6;
+        }
+
+        /* MAIN PAGE */
+        #wedding-page { display: none; opacity: 0; transition: opacity 1s ease; }
+        #wedding-page.visible { opacity: 1; }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='1.5' fill='%237aaec4' opacity='0.06'/%3E%3Ccircle cx='10' cy='10' r='1' fill='%23e8b4c8' opacity='0.04'/%3E%3Ccircle cx='70' cy='20' r='0.8' fill='%23a8c9a0' opacity='0.04'/%3E%3Ccircle cx='20' cy='70' r='0.6' fill='%23c4b4d8' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(122, 174, 196, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(232, 180, 200, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(168, 201, 160, 0.04) 0%, transparent 40%),
+                var(--bg);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 600px; }
+
+        .floral-corner { position: absolute; pointer-events: none; opacity: 0.12; }
+        .floral-corner.tl { top: -20px; left: -20px; width: 280px; }
+        .floral-corner.tr { top: -20px; right: -20px; width: 260px; transform: scaleX(-1); }
+        .floral-corner.bl { bottom: -20px; left: -20px; width: 260px; transform: scaleY(-1); }
+        .floral-corner.br { bottom: -20px; right: -20px; width: 280px; transform: scale(-1); }
+
+        .hero-pretitle { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 300; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+        .hero-names { font-family: var(--font-names); font-size: clamp(3rem, 10vw, 6rem); font-weight: 400; line-height: 1.1; color: var(--accent-dark); }
+        .hero-amp { font-family: var(--font-display); font-size: clamp(1.2rem, 3.5vw, 2rem); font-weight: 300; font-style: italic; color: var(--accent); display: block; margin: 4px 0; }
+        .hero-divider { width: 80px; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 24px auto; }
+        .hero-date { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 300; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 20px; }
+
+        .countdown { display: flex; gap: 28px; justify-content: center; margin-bottom: 28px; }
+        .countdown span { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 300; color: var(--accent); display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+        .countdown small { font-family: var(--font-mono); font-size: 0.52rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+
+        .hero-message { font-family: var(--font-body); font-size: 0.95rem; font-style: italic; color: var(--text-muted); line-height: 1.85; max-width: 460px; margin: 0 auto; }
+
+        .verse-block {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.6);
+            border-left: 3px solid var(--accent-light);
+            border-radius: 0 8px 8px 0;
+            max-width: 480px;
+            margin-left: auto; margin-right: auto;
+        }
+        .verse-block p { font-family: var(--font-body); font-size: 0.85rem; font-style: italic; color: var(--text-muted); line-height: 1.8; margin-bottom: 4px; }
+        .verse-block cite { font-family: var(--font-mono); font-size: 0.65rem; font-style: normal; letter-spacing: 0.15em; color: var(--accent); }
+
+        #wedding-page.visible .hero-pretitle { animation: fadeUp 0.8s ease 0.15s both; }
+        #wedding-page.visible .hero-names    { animation: fadeUp 0.8s ease 0.35s both; }
+        #wedding-page.visible .hero-divider  { animation: fadeUp 0.8s ease 0.50s both; }
+        #wedding-page.visible .hero-date     { animation: fadeUp 0.8s ease 0.60s both; }
+        #wedding-page.visible .countdown     { animation: fadeUp 0.8s ease 0.70s both; }
+        #wedding-page.visible .hero-message  { animation: fadeUp 0.8s ease 0.80s both; }
+        #wedding-page.visible .verse-block   { animation: fadeUp 0.8s ease 0.90s both; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+        .section { padding: 80px 24px; max-width: 900px; margin: 0 auto; }
+        .section-full { padding: 80px 24px; }
+        .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 300; text-align: center; color: var(--text); margin-bottom: 8px; }
+        .section-subtitle { font-family: var(--font-body); font-size: 0.92rem; text-align: center; color: var(--text-muted); font-style: italic; max-width: 500px; margin: 0 auto 8px; line-height: 1.7; }
+        .section-divider { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 0 auto 48px; }
+
+        .floral-divider-wrap {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; margin: 0 auto 48px; max-width: 200px;
+        }
+        .floral-divider-wrap .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--accent-light)); }
+        .floral-divider-wrap .line:last-child { background: linear-gradient(to left, transparent, var(--accent-light)); }
+        .floral-divider-wrap svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+
+        .details-section { background: var(--bg-alt); }
+        .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 800px; margin: 0 auto; }
+        .detail-card {
+            background: var(--cream); border-radius: 16px; padding: 32px 24px;
+            text-align: center; box-shadow: 0 4px 20px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(122, 174, 196, 0.08);
+        }
+        .detail-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px var(--shadow-md); }
+        .detail-icon { width: 44px; height: 44px; color: var(--accent); margin: 0 auto 14px; display: block; }
+        .detail-card h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+        .detail-card p { font-family: var(--font-body); font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+        .detail-card small { font-size: 0.8rem; color: var(--text-light); }
+
+        .btn-mapa {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 16px; padding: 10px 20px;
+            background: var(--accent); color: var(--cream); text-decoration: none;
+            border-radius: 8px; font-family: var(--font-mono); font-size: 0.72rem;
+            font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+            transition: background 0.3s ease; border: none;
+        }
+        .btn-mapa:hover { background: var(--accent-hover); }
+        .btn-mapa svg { width: 16px; height: 16px; }
+
+        /* PARENTS */
+        .parents-section { background: var(--cream); position: relative; overflow: hidden; }
+        .parents-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 10% 50%, rgba(232, 180, 200, 0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 90% 50%, rgba(168, 201, 160, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+        .parent-side { text-align: center; }
+        .parent-side .parent-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+        .parent-side .parent-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--text); line-height: 1.6; }
+
+        /* GUIDE SECTION */
+        .guide-section { background: var(--cream); position: relative; overflow: hidden; }
+        .guide-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(168, 201, 160, 0.05) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(122, 174, 196, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .guide-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 20px;
+            background: var(--bg);
+            border-radius: 14px;
+            border: 1px solid rgba(122, 174, 196, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .guide-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+        .guide-icon {
+            flex-shrink: 0;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: var(--accent-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+        .guide-icon svg { width: 20px; height: 20px; }
+        .guide-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .guide-card p {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* STEPS */
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+        .step-card { text-align: center; padding: 20px 16px; }
+        .step-number {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--accent); color: var(--cream);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+            margin: 0 auto 14px;
+        }
+        .step-card h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+        .step-card p { font-family: var(--font-body); font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* GIFT */
+        .gift-section { background: var(--bg-alt); }
+        .gift-cta { text-align: center; margin-top: 32px; }
+        .btn-presentes {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 18px 40px; background: var(--accent); color: var(--cream);
+            border: none; border-radius: 10px;
+            font-family: var(--font-display); font-size: 1.25rem; font-weight: 400;
+            letter-spacing: 0.04em; cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(122, 174, 196, 0.25);
+        }
+        .btn-presentes:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(122, 174, 196, 0.35); }
+        .btn-presentes svg { width: 22px; height: 22px; }
+
+        .confirmed-msg {
+            background: #e4f5ea; color: #1b6b35; padding: 28px; border-radius: 12px;
+            text-align: center; border: 1px solid #c5e6d0; max-width: 500px; margin: 0 auto;
+        }
+        .confirmed-msg h3 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 8px; }
+        .confirmed-msg p { font-size: 0.88rem; }
+
+        /* PIX */
+        .pix-section { background: var(--cream); position: relative; overflow: hidden; }
+        .pix-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 30%, rgba(122, 174, 196, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .pix-card {
+            max-width: 460px;
+            margin: 0 auto;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 28px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .pix-icon-wrap {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: var(--accent-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .pix-icon-wrap svg { width: 28px; height: 28px; color: var(--accent); }
+        .pix-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .pix-card .pix-note {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .pix-key-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--cream);
+            border: 1px dashed var(--accent-light);
+            border-radius: 10px;
+            padding: 14px 20px;
+            margin-bottom: 16px;
+        }
+        .pix-key-box .pix-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+        .pix-key-box .pix-key {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text);
+            word-break: break-all;
+        }
+        .btn-copy-pix {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--accent);
+            color: var(--cream);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .btn-copy-pix:hover { background: var(--accent-hover); }
+        .btn-copy-pix svg { width: 14px; height: 14px; }
+
+        /* RSVP */
+        .rsvp-section { background: var(--bg-alt); position: relative; }
+        .rsvp-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 20% 20%, rgba(122, 174, 196, 0.04) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(196, 180, 216, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .rsvp-form-wrap { max-width: 480px; margin: 0 auto; position: relative; z-index: 1; }
+
+        .form-group { margin-bottom: 14px; }
+        .form-group label {
+            display: block; font-family: var(--font-mono); font-size: 0.68rem;
+            font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-muted); margin-bottom: 6px;
+        }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px 16px;
+            border: 1px solid var(--border); border-radius: 10px;
+            font-family: var(--font-body); font-size: 0.92rem;
+            color: var(--text); background: var(--cream);
+            outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            -webkit-appearance: none;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(122, 174, 196, 0.1);
+        }
+
+        .btn-rsvp {
+            width: 100%; padding: 14px;
+            background: var(--accent); color: var(--cream);
+            border: none; border-radius: 10px;
+            font-family: var(--font-mono); font-size: 0.75rem;
+            font-weight: 400; letter-spacing: 0.12em;
+            text-transform: uppercase; cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .btn-rsvp:hover { background: var(--accent-hover); }
+
+        /* QUOTE */
+        .quote-section { background: var(--bg-alt); text-align: center; position: relative; overflow: hidden; }
+        .quote-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 50%, rgba(196, 180, 216, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .quote-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+        .quote-text { font-family: var(--font-display); font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 300; font-style: italic; color: var(--text); line-height: 1.7; margin-bottom: 16px; }
+        .quote-ref { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+
+        /* FOOTER */
+        footer {
+            padding: 60px 24px; text-align: center;
+            background: radial-gradient(ellipse at 50% 100%, rgba(122, 174, 196, 0.05) 0%, transparent 60%), var(--bg);
+            position: relative;
+        }
+        .footer-names { font-family: var(--font-names); font-size: 2.2rem; font-weight: 400; color: var(--accent-dark); margin-bottom: 6px; }
+        .footer-event { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+        .footer-thanks { font-family: var(--font-body); font-size: 0.88rem; font-style: italic; color: var(--text-muted); margin-bottom: 24px; }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 2000;
+            background: rgba(44, 62, 80, 0.4); backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--cream); border-radius: 20px; padding: 32px 28px;
+            max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto;
+            position: relative; box-shadow: 0 25px 80px rgba(44, 62, 80, 0.2);
+            transform: translateY(20px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.visible .modal-content { transform: translateY(0); }
+        .close-modal {
+            position: absolute; top: 14px; right: 18px;
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: var(--text-muted); cursor: pointer;
+            border-radius: 50%; transition: background 0.2s;
+            border: none; background: none; line-height: 1;
+        }
+        .close-modal:hover { background: rgba(122, 174, 196, 0.08); }
+        .modal-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; text-align: center; color: var(--text); margin-bottom: 4px; }
+        .modal-subtitle { font-family: var(--font-body); font-size: 0.82rem; text-align: center; color: var(--text-muted); font-style: italic; margin-bottom: 24px; }
+
+        .gifts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+        .gift-card {
+            padding: 14px 12px; border: 1px solid var(--border); border-radius: 12px;
+            cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; text-align: center;
+        }
+        .gift-card:hover:not(.unavailable) { border-color: var(--accent); box-shadow: 0 4px 16px var(--shadow); transform: translateY(-2px); }
+        .gift-card.unavailable { opacity: 0.45; cursor: not-allowed; background: #f0f4f7; }
+        .gift-card h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 400; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+        .gift-status { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.03em; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; }
+        .badge.available   { background: #e4f5ea; color: #1b6b35; }
+        .badge.unavailable { background: #fde8e8; color: #b53030; }
+
+        .modal-form { display: none; }
+        .modal-form.visible { display: block; }
+        .modal-selected-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; text-align: center; color: var(--accent); margin-bottom: 24px; }
+        .form-buttons { display: flex; gap: 12px; margin-top: 20px; }
+        .btn-voltar {
+            flex: 1; padding: 12px; background: var(--bg-alt); color: var(--text-muted);
+            border: 1px solid var(--border); border-radius: 10px;
+            font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400;
+            letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+        }
+        .btn-voltar:hover { background: var(--bg); }
+        .btn-confirmar {
+            flex: 1; padding: 12px; background: var(--accent); color: var(--cream);
+            border: none; border-radius: 10px;
+            font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400;
+            letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+        }
+        .btn-confirmar:hover { background: var(--accent-hover); }
+        .modal-confirmed-view { display: none; text-align: center; padding: 16px 0; }
+        .modal-confirmed-view.visible { display: block; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .stagger > .reveal:nth-child(1) { transition-delay: 0s; }
+        .stagger > .reveal:nth-child(2) { transition-delay: 0.12s; }
+        .stagger > .reveal:nth-child(3) { transition-delay: 0.24s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .section, .section-full { padding: 60px 20px; }
+            .details-grid { grid-template-columns: 1fr; }
+            .steps-grid   { grid-template-columns: 1fr; gap: 12px; }
+            .modal-content { padding: 24px 18px; }
+            .gifts-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .countdown { gap: 20px; }
+            .btn-presentes { padding: 16px 28px; font-size: 1.1rem; }
+            .parents-grid { grid-template-columns: 1fr; gap: 20px; }
+            .floral-corner { opacity: 0.06; }
+            .guide-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 380px) {
+            .gifts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENVELOPE SCREEN -->
+    <div id="envelope-screen">
+        <p class="envelope-intro">Você recebeu um convite especial</p>
+        <div class="envelope-scene">
+            <div class="envelope-wrapper" id="envelope">
+                <div class="envelope-shadow"></div>
+                <div class="envelope-back"></div>
+                <div class="envelope-inner-v"></div>
+                <div class="envelope-left-fold"></div>
+                <div class="envelope-right-fold"></div>
+                <div class="envelope-card" id="envelope-card">
+                    <span class="card-ornament">&#10022; &#10022; &#10022;</span>
+                    <p class="card-pretext">Estamos felizes em convidar você para</p>
+                    <h2 class="card-main-title">Nosso Casamento</h2>
+                    <div class="card-small-divider"></div>
+                    <p class="card-names">Gabriela<br><em>&amp;</em><br>Gabriel</p>
+                    <div class="card-small-divider"></div>
+                    <p class="card-date-line">28 &middot; 11 &middot; 2026</p>
+                </div>
+                <div class="envelope-flap" id="envelope-flap">
+                    <div class="envelope-flap-front"></div>
+                    <div class="envelope-flap-back"></div>
+                </div>
+                <div class="wax-seal-container">
+                    <svg class="wax-seal" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="36" fill="var(--wax-mid)" />
+                        <circle cx="40" cy="40" r="30" fill="none" stroke="var(--wax-light)" stroke-width="1" opacity="0.5"/>
+                        <circle cx="40" cy="40" r="24" fill="none" stroke="var(--wax-light)" stroke-width="0.5" opacity="0.3"/>
+                        <text x="40" y="36" text-anchor="middle" font-family="'Ballet', cursive" font-size="16" fill="white" opacity="0.9">G</text>
+                        <text x="40" y="42" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="11" font-style="italic" fill="white" opacity="0.7">&amp;</text>
+                        <text x="40" y="54" text-anchor="middle" font-family="'Ballet', cursive" font-size="16" fill="white" opacity="0.9">G</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <p class="card-hint" id="cardHint">Toque no convite para abrir</p>
+    </div>
+
+    <!-- MAIN PAGE -->
+    <main id="wedding-page">
+
+        <!-- HERO -->
+        <section class="hero">
+            <svg class="floral-corner tl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke-linecap="round">
+                    <path d="M10,290 Q80,250 120,180 T180,100" stroke="#7aaec4" stroke-width="1.5"/>
+                    <path d="M30,280 Q90,220 110,160" stroke="#a8c9a0" stroke-width="1"/>
+                    <circle cx="120" cy="170" r="8" fill="#e8b4c8" opacity="0.4"/>
+                    <circle cx="115" cy="165" r="5" fill="#f2d4e0" opacity="0.3"/>
+                    <circle cx="125" cy="175" r="3" fill="#e8b4c8" opacity="0.3"/>
+                    <circle cx="180" cy="95" r="10" fill="#c4b4d8" opacity="0.3"/>
+                    <circle cx="175" cy="90" r="6" fill="#d4c8e4" opacity="0.3"/>
+                    <path d="M100,200 Q95,180 80,170" stroke="#a8c9a0" stroke-width="0.8"/>
+                    <ellipse cx="78" cy="167" rx="4" ry="6" fill="#a8c9a0" opacity="0.3" transform="rotate(-20 78 167)"/>
+                    <path d="M140,140 Q150,120 160,110" stroke="#9ab8d4" stroke-width="0.8"/>
+                    <circle cx="160" cy="108" r="5" fill="#9ab8d4" opacity="0.25"/>
+                    <path d="M60,250 Q50,230 65,210" stroke="#7aaec4" stroke-width="0.8"/>
+                    <circle cx="66" cy="208" r="6" fill="#7aaec4" opacity="0.2"/>
+                    <ellipse cx="90" cy="230" rx="3" ry="8" fill="#a8c9a0" opacity="0.2" transform="rotate(30 90 230)"/>
+                    <ellipse cx="160" cy="160" rx="3" ry="7" fill="#a8c9a0" opacity="0.2" transform="rotate(-15 160 160)"/>
+                </g>
+            </svg>
+            <svg class="floral-corner br" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke-linecap="round">
+                    <path d="M10,290 Q80,250 120,180 T180,100" stroke="#7aaec4" stroke-width="1.5"/>
+                    <path d="M30,280 Q90,220 110,160" stroke="#a8c9a0" stroke-width="1"/>
+                    <circle cx="120" cy="170" r="8" fill="#e8b4c8" opacity="0.4"/>
+                    <circle cx="115" cy="165" r="5" fill="#f2d4e0" opacity="0.3"/>
+                    <circle cx="180" cy="95" r="10" fill="#c4b4d8" opacity="0.3"/>
+                    <circle cx="175" cy="90" r="6" fill="#d4c8e4" opacity="0.3"/>
+                    <path d="M100,200 Q95,180 80,170" stroke="#a8c9a0" stroke-width="0.8"/>
+                    <ellipse cx="78" cy="167" rx="4" ry="6" fill="#a8c9a0" opacity="0.3" transform="rotate(-20 78 167)"/>
+                    <path d="M140,140 Q150,120 160,110" stroke="#9ab8d4" stroke-width="0.8"/>
+                    <circle cx="160" cy="108" r="5" fill="#9ab8d4" opacity="0.25"/>
+                    <path d="M60,250 Q50,230 65,210" stroke="#7aaec4" stroke-width="0.8"/>
+                    <circle cx="66" cy="208" r="6" fill="#7aaec4" opacity="0.2"/>
+                    <ellipse cx="90" cy="230" rx="3" ry="8" fill="#a8c9a0" opacity="0.2" transform="rotate(30 90 230)"/>
+                </g>
+            </svg>
+
+            <div class="hero-content">
+                <p class="hero-pretitle">Save the Date</p>
+                <h1 class="hero-names">
+                    Gabriela
+                    <span class="hero-amp">&amp;</span>
+                    Gabriel
+                </h1>
+                <div class="hero-divider"></div>
+                <p class="hero-date">28 &middot; Novembro &middot; 2026</p>
+                <div class="countdown" id="countdown"></div>
+                <p class="hero-message">
+                    Com a benção de Deus e de nossas pais, convidamos vocês
+                    para a celebração do nosso casamento.
+                    Sua presença tornará este dia ainda mais especial!
+                </p>
+                <div class="verse-block">
+                    <p>"Assim, eles já não são dois, mas sim uma só carne. Portanto, o que Deus uniu, ninguém o separe."</p>
+                    <cite>— Mateus 19:6</cite>
+                </div>
+            </div>
+        </section>
+
+        <!-- DETAILS -->
+        <section class="section-full details-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <h2 class="section-title reveal">Celebre Conosco</h2>
+                <p class="section-subtitle reveal">Todos os detalhes para o nosso grande dia</p>
+                <div class="floral-divider-wrap">
+                    <div class="line"></div>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C12 2 14 6 14 8C14 10 12.5 11 12 12C11.5 11 10 10 10 8C10 6 12 2 12 2Z" fill="currentColor" opacity="0.4"/>
+                        <path d="M12 2C12 2 8 5 7 7C6 9 7 10.5 8 11C7 11.5 5 11 4 9C3 7 6 3 12 2Z" fill="currentColor" opacity="0.3"/>
+                        <path d="M12 2C12 2 16 5 17 7C18 9 17 10.5 16 11C17 11.5 19 11 20 9C21 7 18 3 12 2Z" fill="currentColor" opacity="0.3"/>
+                        <path d="M12 12L12 22" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    </svg>
+                    <div class="line"></div>
+                </div>
+                <div class="details-grid stagger">
+                    <div class="detail-card reveal">
+                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <h3>Data</h3>
+                        <p>28 de Novembro de 2026<br><small>Sábado</small></p>
+                    </div>
+                    <div class="detail-card reveal">
+                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <h3>Horário</h3>
+                        <p>Cerimônia às 16h00<br><small>Recepção no mesmo local</small></p>
+                    </div>
+                    <div class="detail-card reveal">
+                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <h3>Local</h3>
+                        <p>Centro de Eventos Nossa Senhora do Rosário</p>
+                        <small>Rua Padre Antônio, 190 — Perdigão - MG</small>
+                        <br>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Rua+padre+Antônio,+190+-+centro+de+eventos+nossa+senhora+do+Rosário+-+Perdigão+mg" target="_blank" rel="noopener" class="btn-mapa">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                            Ver no Mapa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARENTS -->
+        <section class="section-full parents-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <p class="section-subtitle reveal">Com as bênçãos de Deus e de quem nos trouxe ao mundo</p>
+                <div class="floral-divider-wrap">
+                    <div class="line"></div>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1"/>
+                    </svg>
+                    <div class="line"></div>
+                </div>
+                <div class="parents-grid reveal">
+                    <div class="parent-side">
+                        <p class="parent-label">Pais da Noiva</p>
+                        <p class="parent-name">Celma Cardoso<br>&<br>Geraldo Magela</p>
+                    </div>
+                    <div class="parent-side">
+                        <p class="parent-label">Pais do Noivo</p>
+                        <p class="parent-name">Vilene Mendes<br>&<br>Emerson de Oliveira</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUIDE -->
+        <section class="section-full guide-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <h2 class="section-title reveal">Manual do Convidado</h2>
+                <p class="section-subtitle reveal">Algumas dicas para aproveitar ao máximo esse dia especial</p>
+                <div class="floral-divider-wrap">
+                    <div class="line"></div>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1"/>
+                    </svg>
+                    <div class="line"></div>
+                </div>
+                <div class="guide-grid stagger">
+                    <div class="guide-card reveal">
+                        <div class="guide-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Chegue com antecedência</h4>
+                            <p>Procure chegar pelo menos 30 minutos antes do início da cerimônia para se acomodar sem pressa.</p>
+                        </div>
+                    </div>
+                    <div class="guide-card reveal">
+                        <div class="guide-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Tire muitas fotos</h4>
+                            <p>Registre cada momento! Depois, marque a gente nas redes sociais — vamos adorar ver pelos seus olhos.</p>
+                        </div>
+                    </div>
+                    <div class="guide-card reveal">
+                        <div class="guide-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Sem convidados extras</h4>
+                            <p>O convite é pessoal e intransferível. Pedimos que não traga acompanhantes que não foram convidados.</p>
+                        </div>
+                    </div>
+                    <div class="guide-card reveal">
+                        <div class="guide-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Aproveite a festa</h4>
+                            <p>Curta cada momento, celebre e faça dessa noite uma lembrança inesquecível para todos nós!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section class="section-full rsvp-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <h2 class="section-title reveal">Confirme sua Presença</h2>
+                <p class="section-subtitle reveal">Sua presença é o nosso maior presente</p>
+                <div class="floral-divider-wrap">
+                    <div class="line"></div>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1"/>
+                    </svg>
+                    <div class="line"></div>
+                </div>
+                <div class="rsvp-form-wrap reveal" id="rsvp-area">
+                    {% if presenca_confirmada %}
+                    <div class="confirmed-msg">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>Presença confirmada!</h3>
+                        <p>Obrigado, {{ convidado_nome }}! Mal podemos esperar para celebrar com você.</p>
+                    </div>
+                    {% else %}
+                    <form id="rsvp-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="rsvp-nome">Seu Nome</label>
+                            <input type="text" id="rsvp-nome" name="nome" placeholder="Nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvp-telefone">WhatsApp</label>
+                            <input type="tel" id="rsvp-telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <button type="submit" class="btn-rsvp">Confirmar Presença</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="section">
+            <h2 class="section-title reveal">Lista de Presentes</h2>
+            <p class="section-subtitle reveal">Escolher seu presente é simples e rápido</p>
+            <div class="floral-divider-wrap">
+                <div class="line"></div>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 12v10H4V12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M2 7h20v5H2z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M12 22V7" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="0.8"/>
+                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="0.8"/>
+                </svg>
+                <div class="line"></div>
+            </div>
+            <div class="steps-grid stagger">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <h3>Veja a Lista</h3>
+                    <p>Navegue pela nossa seleção de presentes escolhidos com carinho.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <h3>Escolha seu Presente</h3>
+                    <p>Selecione o item que mais combina com você e preencha seus dados.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <h3>Confirme</h3>
+                    <p>Pronto! Seu presente fica reservado na lista de escolhidos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GIFT SECTION -->
+        <section class="section-full gift-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <h2 class="section-title reveal">Escolha seu Presente</h2>
+                <p class="section-subtitle reveal">
+                    Preparamos uma lista especial com itens para o nosso novo lar.
+                    Cada presente escolhido com amor fará toda a diferença!
+                </p>
+                <div class="floral-divider-wrap">
+                    <div class="line"></div>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 12v10H4V12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M2 7h20v5H2z" stroke="currentColor" stroke-width="1.2"/>
+                        <path d="M12 22V7" stroke="currentColor" stroke-width="1.2"/>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="0.8"/>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="0.8"/>
+                    </svg>
+                    <div class="line"></div>
+                </div>
+                <div class="gift-cta reveal" id="gift-cta">
+                    {% if presente_confirmado %}
+                    <div class="confirmed-msg">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>Você já confirmou seu presente!</h3>
+                        <p>Presente escolhido: <strong>{{ presente_nome }}</strong>. Agradecemos imensamente o seu carinho!</p>
+                    </div>
+                    {% else %}
+                    <button class="btn-presentes" id="btn-open-gifts">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+                        </svg>
+                        Escolher Meu Presente
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- PIX -->
+        <section class="section-full pix-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <div class="pix-card reveal">
+                    <div class="pix-icon-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+                        </svg>
+                    </div>
+                    <h3>Se preferir, Pix</h3>
+                    <p class="pix-note">
+                        Caso queira nos presentear de forma prática, ficamos muito gratos com qualquer contribuição via Pix!
+                    </p>
+                    <div class="pix-key-box">
+                        <div>
+                            <p class="pix-label">Chave Pix (telefone)</p>
+                            <p class="pix-key">37998632605</p>
+                        </div>
+                    </div>
+                    <button class="btn-copy-pix" id="btn-copy-pix" onclick="copyPix()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                        Copiar Chave Pix
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section class="section-full quote-section">
+            <div class="quote-content reveal">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 16px;display:block;opacity:0.2;color:var(--accent);">
+                    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" fill="currentColor"/>
+                    <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" fill="currentColor"/>
+                </svg>
+                <p class="quote-text">
+                    "As coisas que o olho não viu, e o ouvido não ouviu, e não subiram ao coração do homem são as que Deus preparou para os que O amam."
+                </p>
+                <p class="quote-ref">— 1 Coríntios 2:9</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="footer-names">Gabriela &amp; Gabriel</p>
+            <p class="footer-event">Casamento &mdash; 28 de Novembro de 2026</p>
+            <p class="footer-thanks">Obrigado por fazer parte deste momento especial!</p>
+            <div>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--accent)" stroke="none">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+            </div>
+        </footer>
+    </main>
+
+    <!-- GIFT MODAL -->
+    <div id="gift-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <div id="modal-gifts">
+                <h2 class="modal-title">Selecione um Presente</h2>
+                <p class="modal-subtitle">Clique em um item para escolhê-lo</p>
+                <div class="gifts-grid" id="gifts-grid"></div>
+            </div>
+            <div id="modal-form" class="modal-form">
+                <h2 class="modal-selected-name" id="selected-gift-name"></h2>
+                <form id="gift-form">
+                    {% csrf_token %}
+                    <input type="hidden" id="gift-id-input" value="">
+                    <div class="form-group">
+                        <label for="gift-nome">Seu Nome Completo</label>
+                        <input type="text" id="gift-nome" name="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gift-telefone">Número de WhatsApp</label>
+                        <input type="tel" id="gift-telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn-voltar" id="btn-voltar">Voltar</button>
+                        <button type="submit" class="btn-confirmar">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+            <div id="modal-confirmed" class="modal-confirmed-view">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                <h2 class="modal-title" style="margin-top:16px;">Presente Confirmado!</h2>
+                <p class="modal-subtitle">Agradecemos imensamente o seu carinho. Mal podemos esperar para celebrar com você!</p>
+                <button class="btn-confirmar" id="btn-close-confirmed" style="margin-top:16px;width:auto;padding:12px 32px;">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gifts = {{ items_json|safe }};
+
+        /* PIX COPY */
+        function copyPix() {
+            navigator.clipboard.writeText('37998632605').then(function() {
+                var btn = document.getElementById('btn-copy-pix');
+                btn.innerHTML =
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copiado!';
+                setTimeout(function() {
+                    btn.innerHTML =
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar Chave Pix';
+                }, 2500);
+            });
+        }
+
+        /* ENVELOPE */
+        const envelope = document.getElementById('envelope');
+        const envelopeScreen = document.getElementById('envelope-screen');
+        const weddingPage = document.getElementById('wedding-page');
+        const cardHint = document.getElementById('cardHint');
+        let envelopeOpened = false;
+
+        if (envelope) {
+            envelope.addEventListener('click', function () {
+                if (envelopeOpened) return;
+                envelopeOpened = true;
+                envelope.classList.add('opened');
+                if (cardHint) {
+                    cardHint.style.opacity = '0';
+                    cardHint.style.pointerEvents = 'none';
+                }
+                setTimeout(function () {
+                    envelopeScreen.classList.add('hidden');
+                    setTimeout(function () {
+                        envelopeScreen.style.display = 'none';
+                        weddingPage.style.display = 'block';
+                        void weddingPage.offsetHeight;
+                        weddingPage.classList.add('visible');
+                        initRevealAnimations();
+                        updateCountdown();
+                    }, 800);
+                }, 2000);
+            });
+        }
+
+        (function () {
+            if (!envelopeScreen) return;
+            for (let i = 0; i < 30; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.animationDuration = (6 + Math.random() * 14) + 's';
+                s.style.animationDelay = Math.random() * 14 + 's';
+                s.style.width = s.style.height = (1 + Math.random() * 3) + 'px';
+                envelopeScreen.appendChild(s);
+            }
+        })();
+
+        /* COUNTDOWN */
+        function updateCountdown() {
+            const wedding = new Date('2026-11-28T16:00:00');
+            const now = new Date();
+            const diff = wedding - now;
+            const el = document.getElementById('countdown');
+            if (!el || diff <= 0) { if (el) el.style.display = 'none'; return; }
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            el.innerHTML =
+                '<span>' + d + '<small>dias</small></span>' +
+                '<span>' + h + '<small>horas</small></span>' +
+                '<span>' + m + '<small>min</small></span>';
+        }
+
+        /* SCROLL REVEAL */
+        function initRevealAnimations() {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.reveal').forEach(function (el) {
+                observer.observe(el);
+            });
+        }
+
+        /* RSVP */
+        const rsvpForm = document.getElementById('rsvp-form');
+        if (rsvpForm) {
+            rsvpForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const btn = this.querySelector('.btn-rsvp');
+                const originalText = btn.textContent;
+                btn.textContent = 'CONFIRMANDO...';
+                btn.disabled = true;
+
+                const formData = new FormData(rsvpForm);
+
+                fetch("{% url 'home:confirmar_presenca' %}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        const rsvpArea = document.getElementById('rsvp-area');
+                        rsvpArea.innerHTML = `
+                            <div class="confirmed-msg">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <h3>Presença confirmada!</h3>
+                                <p>Obrigado, ${data.guest_name || ''}! Mal podemos esperar para celebrar com você.</p>
+                            </div>
+                        `;
+                    } else {
+                        alert(data.message || 'Erro ao confirmar presença.');
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }
+                })
+                .catch(() => {
+                    alert('Erro de conexão. Tente novamente.');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                });
+            });
+        }
+
+        /* GIFTS */
+        const giftModal = document.getElementById('gift-modal');
+        const btnOpenGifts = document.getElementById('btn-open-gifts');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalGiftsView = document.getElementById('modal-gifts');
+        const modalFormView = document.getElementById('modal-form');
+        const modalConfirmedV = document.getElementById('modal-confirmed');
+        const giftsGrid = document.getElementById('gifts-grid');
+        const selectedGiftName = document.getElementById('selected-gift-name');
+        const giftIdInput = document.getElementById('gift-id-input');
+        const btnVoltar = document.getElementById('btn-voltar');
+        const btnCloseConfirm = document.getElementById('btn-close-confirmed');
+        const giftForm = document.getElementById('gift-form');
+        const giftCta = document.getElementById('gift-cta');
+
+        function renderGifts() {
+            if (!giftsGrid) return;
+            giftsGrid.innerHTML = '';
+            gifts.forEach(function (g) {
+                const available = g.available;
+                const div = document.createElement('div');
+                div.className = 'gift-card' + (available ? '' : ' unavailable');
+                div.innerHTML =
+                    '<h4>' + g.name + '</h4>' +
+                    '<div class="gift-status">' +
+                    (available
+                        ? '<span class="badge available">' + g.reserved + ' de ' + g.quantity + ' escolhidos</span>'
+                        : '<span class="badge unavailable">Esgotado (' + g.quantity + '/' + g.quantity + ')</span>'
+                    ) + '</div>';
+                if (available) div.addEventListener('click', function () { selectGift(g); });
+                giftsGrid.appendChild(div);
+            });
+        }
+
+        function selectGift(g) {
+            selectedGiftName.textContent = 'Você escolheu: ' + g.name;
+            giftIdInput.value = g.id;
+            modalGiftsView.style.display = 'none';
+            modalFormView.classList.add('visible');
+        }
+
+        if (btnOpenGifts) {
+            btnOpenGifts.addEventListener('click', function () {
+                renderGifts();
+                showGiftsView();
+                giftModal.classList.add('visible');
+            });
+        }
+
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeGiftModal);
+        if (giftModal) {
+            giftModal.addEventListener('click', function (e) {
+                if (e.target === giftModal) closeGiftModal();
+            });
+        }
+
+        function closeGiftModal() {
+            if (!giftModal) return;
+            giftModal.classList.remove('visible');
+            setTimeout(showGiftsView, 300);
+        }
+
+        function showGiftsView() {
+            if (!modalGiftsView) return;
+            modalGiftsView.style.display = 'block';
+            modalFormView.classList.remove('visible');
+            modalConfirmedV.classList.remove('visible');
+        }
+
+        if (btnVoltar) {
+            btnVoltar.addEventListener('click', function () {
+                modalFormView.classList.remove('visible');
+                modalGiftsView.style.display = 'block';
+            });
+        }
+
+        if (giftForm) {
+            giftForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const submitBtn = this.querySelector('.btn-confirmar');
+                const origText = submitBtn.textContent;
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.disabled = true;
+
+                const formData = new FormData();
+                const csrfInput = giftForm.querySelector('[name=csrfmiddlewaretoken]');
+                if (csrfInput) {
+                    formData.append('csrfmiddlewaretoken', csrfInput.value);
+                }
+                formData.append('nome', document.getElementById('gift-nome').value);
+                formData.append('telefone', document.getElementById('gift-telefone').value);
+                formData.append('presente', giftIdInput.value);
+
+                fetch("{% url 'home:confirmar_presente' %}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    submitBtn.textContent = origText;
+                    submitBtn.disabled = false;
+
+                    if (data.success) {
+                        const gid = parseInt(giftIdInput.value);
+                        const gift = gifts.find(function (g) { return g.id === gid; });
+                        if (gift) {
+                            gift.reserved++;
+                            gift.available = gift.reserved < gift.quantity;
+                        }
+
+                        modalGiftsView.style.display = 'none';
+                        modalFormView.classList.remove('visible');
+                        modalConfirmedV.classList.add('visible');
+
+                        if (giftCta) {
+                            giftCta.innerHTML = `
+                                <div class="confirmed-msg">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                                    </svg>
+                                    <h3>Você já confirmou seu presente!</h3>
+                                    <p>Presente escolhido: <strong>${data.gift_name || ''}</strong>. Agradecemos imensamente o seu carinho!</p>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        alert(data.message || 'Erro ao confirmar presente.');
+                    }
+                })
+                .catch(() => {
+                    submitBtn.textContent = origText;
+                    submitBtn.disabled = false;
+                    alert('Erro de conexão ao salvar presente.');
+                });
+            });
+        }
+
+        if (btnCloseConfirm) btnCloseConfirm.addEventListener('click', closeGiftModal);
+    </script>
+</body>
+</html>
