@@ -26,6 +26,7 @@ class Home(TemplateView):
             {
                 "id": item.id,
                 "name": item.name,
+                "image": item.image.url if item.image else "",
                 "quantity": item.quantity,
                 "reserved": item.reservations_count,
                 "available": item.is_available,
@@ -33,14 +34,20 @@ class Home(TemplateView):
             for item in items
         ])
 
-        # Sessão — presença
-        context["presenca_confirmada"] = self.request.session.get("presenca_confirmada", False)
-        context["convidado_nome"] = self.request.session.get("convidado_nome", "")
-
         # Sessão — presente
         context["presente_confirmado"] = self.request.session.get("presente_confirmado", False)
         context["presente_nome"] = self.request.session.get("presente_nome", "")
 
+        return context
+
+
+class ConfirmarPresenca(TemplateView):
+    template_name = "home/confirmar_presenca.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["presenca_confirmada"] = self.request.session.get("presenca_confirmada", False)
+        context["convidado_nome"] = self.request.session.get("convidado_nome", "")
         return context
 
 

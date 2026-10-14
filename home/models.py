@@ -3,6 +3,9 @@ from django.db import models
 
 class Presente(models.Model):
     name = models.CharField(max_length=200, verbose_name="Nome")
+    image = models.ImageField(
+        upload_to="items/", blank=True, default="", verbose_name="Foto"
+    )
     quantity = models.PositiveIntegerField(default=1, verbose_name="Quantidade total")
     active = models.BooleanField(default=True, verbose_name="Ativo")
 

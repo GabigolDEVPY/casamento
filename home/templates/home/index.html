@@ -609,16 +609,6 @@
         .btn-copy-pix:hover { background: var(--accent-hover); }
         .btn-copy-pix svg { width: 14px; height: 14px; }
 
-        /* RSVP */
-        .rsvp-section { background: var(--bg-alt); position: relative; }
-        .rsvp-section::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(ellipse at 20% 20%, rgba(122, 174, 196, 0.04) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 80%, rgba(196, 180, 216, 0.04) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        .rsvp-form-wrap { max-width: 480px; margin: 0 auto; position: relative; z-index: 1; }
-
         .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block; font-family: var(--font-mono); font-size: 0.68rem;
@@ -637,17 +627,6 @@
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(122, 174, 196, 0.1);
         }
-
-        .btn-rsvp {
-            width: 100%; padding: 14px;
-            background: var(--accent); color: var(--cream);
-            border: none; border-radius: 10px;
-            font-family: var(--font-mono); font-size: 0.75rem;
-            font-weight: 400; letter-spacing: 0.12em;
-            text-transform: uppercase; cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .btn-rsvp:hover { background: var(--accent-hover); }
 
         /* QUOTE */
         .quote-section { background: var(--bg-alt); text-align: center; position: relative; overflow: hidden; }
@@ -700,16 +679,28 @@
 
         .gifts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
         .gift-card {
+            width: 100%;
             padding: 14px 12px; border: 1px solid var(--border); border-radius: 12px;
+            color: var(--text); background: var(--cream); font: inherit;
             cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; text-align: center;
         }
         .gift-card:hover:not(.unavailable) { border-color: var(--accent); box-shadow: 0 4px 16px var(--shadow); transform: translateY(-2px); }
-        .gift-card.unavailable { opacity: 0.45; cursor: not-allowed; background: #f0f4f7; }
+        .gift-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .gift-card.unavailable { filter: grayscale(1); cursor: not-allowed; background: #e7eaec; border-color: #cbd2d6; }
+        .gift-card:disabled { opacity: 0.7; }
+        .gift-card-image, .gift-card-image-placeholder {
+            display: grid; width: 100%; aspect-ratio: 4 / 3; margin-bottom: 10px;
+            border-radius: 6px; object-fit: cover;
+        }
+        .gift-card-image-placeholder {
+            place-items: center; color: var(--text-muted); background: #edf1f3;
+            font-family: var(--font-mono); font-size: 0.62rem;
+        }
         .gift-card h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 400; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
         .gift-status { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.03em; }
         .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; }
         .badge.available   { background: #e4f5ea; color: #1b6b35; }
-        .badge.unavailable { background: #fde8e8; color: #b53030; }
+        .badge.unavailable { background: #d8dfe2; color: #4b565b; }
 
         .modal-form { display: none; }
         .modal-form.visible { display: block; }
@@ -774,7 +765,7 @@
                     <p class="card-pretext">Estamos felizes em convidar você para</p>
                     <h2 class="card-main-title">Nosso Casamento</h2>
                     <div class="card-small-divider"></div>
-                    <p class="card-names">Gabriela<br><em>&amp;</em><br>Gabriel</p>
+                    <p class="card-names">Gabriel<br><em>&amp;</em><br>Gabriela</p>
                     <div class="card-small-divider"></div>
                     <p class="card-date-line">28 &middot; 11 &middot; 2026</p>
                 </div>
@@ -838,29 +829,47 @@
                     <ellipse cx="90" cy="230" rx="3" ry="8" fill="#a8c9a0" opacity="0.2" transform="rotate(30 90 230)"/>
                 </g>
             </svg>
-
+            
             <div class="hero-content">
                 <p class="hero-pretitle">Save the Date</p>
                 <h1 class="hero-names">
-                    Gabriela
-                    <span class="hero-amp">&amp;</span>
                     Gabriel
+                    <span class="hero-amp">&amp;</span>
+                    Gabriela
                 </h1>
                 <div class="hero-divider"></div>
                 <p class="hero-date">28 &middot; Novembro &middot; 2026</p>
                 <div class="countdown" id="countdown"></div>
-                <p class="hero-message">
-                    Com a benção de Deus e de nossas pais, convidamos vocês
-                    para a celebração do nosso casamento.
-                    Sua presença tornará este dia ainda mais especial!
-                </p>
                 <div class="verse-block">
                     <p>"Assim, eles já não são dois, mas sim uma só carne. Portanto, o que Deus uniu, ninguém o separe."</p>
                     <cite>— Mateus 19:6</cite>
                 </div>
             </div>
         </section>
-
+        <!-- PARENTS -->
+        <section class="section-full parents-section">
+            <div class="section" style="padding-top:0;padding-bottom:0;">
+                <p class="section-subtitle reveal">Com as bênçãos de Deus e de quem nos trouxe ao mundo</p>
+                <div class="floral-divider-wrap">
+                    <div class="line"></div>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1"/>
+                    </svg>
+                    <div class="line"></div>
+                </div>
+                <div class="parents-grid reveal">
+                    <div class="parent-side">
+                        <p class="parent-label">Pais da Noiva</p>
+                        <p class="parent-name">Celma Cardoso<br>&<br>Geraldo Magela</p>
+                    </div>
+                    <div class="parent-side">
+                        <p class="parent-label">Pais do Noivo</p>
+                        <p class="parent-name">Vilene Mendes<br>&<br>Emerson de Oliveira</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- DETAILS -->
         <section class="section-full details-section">
             <div class="section" style="padding-top:0;padding-bottom:0;">
@@ -907,31 +916,8 @@
                 </div>
             </div>
         </section>
-
-        <!-- PARENTS -->
-        <section class="section-full parents-section">
-            <div class="section" style="padding-top:0;padding-bottom:0;">
-                <p class="section-subtitle reveal">Com as bênçãos de Deus e de quem nos trouxe ao mundo</p>
-                <div class="floral-divider-wrap">
-                    <div class="line"></div>
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1"/>
-                    </svg>
-                    <div class="line"></div>
-                </div>
-                <div class="parents-grid reveal">
-                    <div class="parent-side">
-                        <p class="parent-label">Pais da Noiva</p>
-                        <p class="parent-name">Celma Cardoso<br>&<br>Geraldo Magela</p>
-                    </div>
-                    <div class="parent-side">
-                        <p class="parent-label">Pais do Noivo</p>
-                        <p class="parent-name">Vilene Mendes<br>&<br>Emerson de Oliveira</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        
+        
         <!-- GUIDE -->
         <section class="section-full guide-section">
             <div class="section" style="padding-top:0;padding-bottom:0;">
@@ -981,6 +967,17 @@
                     <div class="guide-card reveal">
                         <div class="guide-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Atenção ao traje</h4>
+                            <p>LEMBRE-SE BRANCO É A COR DA NOIVA!</p>
+                        </div>
+                    </div>
+                    <div class="guide-card reveal">
+                        <div class="guide-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
                         </div>
@@ -989,45 +986,6 @@
                             <p>Curta cada momento, celebre e faça dessa noite uma lembrança inesquecível para todos nós!</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- RSVP -->
-        <section class="section-full rsvp-section">
-            <div class="section" style="padding-top:0;padding-bottom:0;">
-                <h2 class="section-title reveal">Confirme sua Presença</h2>
-                <p class="section-subtitle reveal">Sua presença é o nosso maior presente</p>
-                <div class="floral-divider-wrap">
-                    <div class="line"></div>
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1"/>
-                    </svg>
-                    <div class="line"></div>
-                </div>
-                <div class="rsvp-form-wrap reveal" id="rsvp-area">
-                    {% if presenca_confirmada %}
-                    <div class="confirmed-msg">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                        <h3>Presença confirmada!</h3>
-                        <p>Obrigado, {{ convidado_nome }}! Mal podemos esperar para celebrar com você.</p>
-                    </div>
-                    {% else %}
-                    <form id="rsvp-form">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="rsvp-nome">Seu Nome</label>
-                            <input type="text" id="rsvp-nome" name="nome" placeholder="Nome completo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="rsvp-telefone">WhatsApp</label>
-                            <input type="tel" id="rsvp-telefone" name="telefone" placeholder="(00) 00000-0000" required>
-                        </div>
-                        <button type="submit" class="btn-rsvp">Confirmar Presença</button>
-                    </form>
-                    {% endif %}
                 </div>
             </div>
         </section>
@@ -1291,52 +1249,6 @@
             });
         }
 
-        /* RSVP */
-        const rsvpForm = document.getElementById('rsvp-form');
-        if (rsvpForm) {
-            rsvpForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const btn = this.querySelector('.btn-rsvp');
-                const originalText = btn.textContent;
-                btn.textContent = 'CONFIRMANDO...';
-                btn.disabled = true;
-
-                const formData = new FormData(rsvpForm);
-
-                fetch("{% url 'home:confirmar_presenca' %}", {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.success) {
-                        const rsvpArea = document.getElementById('rsvp-area');
-                        rsvpArea.innerHTML = `
-                            <div class="confirmed-msg">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1b6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                                </svg>
-                                <h3>Presença confirmada!</h3>
-                                <p>Obrigado, ${data.guest_name || ''}! Mal podemos esperar para celebrar com você.</p>
-                            </div>
-                        `;
-                    } else {
-                        alert(data.message || 'Erro ao confirmar presença.');
-                        btn.textContent = originalText;
-                        btn.disabled = false;
-                    }
-                })
-                .catch(() => {
-                    alert('Erro de conexão. Tente novamente.');
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                });
-            });
-        }
-
         /* GIFTS */
         const giftModal = document.getElementById('gift-modal');
         const btnOpenGifts = document.getElementById('btn-open-gifts');
@@ -1357,17 +1269,40 @@
             giftsGrid.innerHTML = '';
             gifts.forEach(function (g) {
                 const available = g.available;
-                const div = document.createElement('div');
-                div.className = 'gift-card' + (available ? '' : ' unavailable');
-                div.innerHTML =
-                    '<h4>' + g.name + '</h4>' +
-                    '<div class="gift-status">' +
-                    (available
-                        ? '<span class="badge available">' + g.reserved + ' de ' + g.quantity + ' escolhidos</span>'
-                        : '<span class="badge unavailable">Esgotado (' + g.quantity + '/' + g.quantity + ')</span>'
-                    ) + '</div>';
-                if (available) div.addEventListener('click', function () { selectGift(g); });
-                giftsGrid.appendChild(div);
+                const card = document.createElement('button');
+                card.type = 'button';
+                card.disabled = !available;
+                card.className = 'gift-card' + (available ? '' : ' unavailable');
+
+                if (g.image) {
+                    const image = document.createElement('img');
+                    image.className = 'gift-card-image';
+                    image.src = g.image;
+                    image.alt = g.name;
+                    card.appendChild(image);
+                } else {
+                    const placeholder = document.createElement('span');
+                    placeholder.className = 'gift-card-image-placeholder';
+                    placeholder.textContent = 'Foto não disponível';
+                    card.appendChild(placeholder);
+                }
+
+                const name = document.createElement('h4');
+                name.textContent = g.name;
+                card.appendChild(name);
+
+                const status = document.createElement('div');
+                status.className = 'gift-status';
+                const badge = document.createElement('span');
+                badge.className = 'badge ' + (available ? 'available' : 'unavailable');
+                badge.textContent = available
+                    ? g.reserved + ' de ' + g.quantity + ' escolhidos'
+                    : 'Esgotado';
+                status.appendChild(badge);
+                card.appendChild(status);
+
+                if (available) card.addEventListener('click', function () { selectGift(g); });
+                giftsGrid.appendChild(card);
             });
         }
 
@@ -1437,8 +1372,8 @@
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 })
-                .then(r => r.json())
-                .then(data => {
+                .then(response => response.json().then(data => ({ response, data })))
+                .then(({ response, data }) => {
                     submitBtn.textContent = origText;
                     submitBtn.disabled = false;
 
@@ -1466,6 +1401,17 @@
                             `;
                         }
                     } else {
+                        if (response.status === 409) {
+                            const unavailableGift = gifts.find(function (gift) {
+                                return gift.id === parseInt(giftIdInput.value);
+                            });
+                            if (unavailableGift) {
+                                unavailableGift.reserved = unavailableGift.quantity;
+                                unavailableGift.available = false;
+                            }
+                            showGiftsView();
+                            renderGifts();
+                        }
                         alert(data.message || 'Erro ao confirmar presente.');
                     }
                 })
